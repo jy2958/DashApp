@@ -1,3 +1,5 @@
+import numpy as np
+import pandas as pd
 def calculate_performance(df, risk_free_rate=0.02):
     """
     计算投资组合和对标指数的表现指标，以及投资组合的超额表现。
