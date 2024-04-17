@@ -113,10 +113,11 @@ def calculate_and_export_cumulative_return_probabilities(df):
         excess_pos_return_prob = excess_returns[excess_returns > 0].count() / excess_returns[excess_returns!=0].count()
 
         # 将结果添加到DataFrame
-        results_df = results_df.append({'Frequency': freq,
+        pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+        results_df = pd.concat(results_df,pd.DataFrame([{'Frequency': freq,
                                         'Portfolio Positive Return Probability': portfolio_pos_return_prob,
                                         'Index Positive Return Probability': index_pos_return_prob,
-                                        'Excess Positive Return Probability': excess_pos_return_prob},
+                                        'Excess Positive Return Probability': excess_pos_return_prob}]),
                                        ignore_index=True)
 
     return results_df
