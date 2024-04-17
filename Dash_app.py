@@ -116,7 +116,7 @@ def render_content(tab, start_date, end_date, risk_free_rate):
     
     df_pnl_filtered['PNL'] = [round(i,0) for i in df_pnl_filtered['PNL']]
     
-    df_pnl_filtered_sector=df_pnl_filtered.groupby('sector').sum()[['PNL']].reset_index()
+    df_pnl_filtered_sector=df_pnl_filtered[['sector','PNL']].groupby('sector').sum().reset_index()
     
     # 板块PNL
     df_pnl_filtered_sector2=df_pnl_filtered_sector.copy()
@@ -131,7 +131,7 @@ def render_content(tab, start_date, end_date, risk_free_rate):
     df_transactions_filtered2=pd.merge(df_transactions_filtered,
                                    df_index_components_uni,
                                  on=['code'],how='left')
-    df_capital_sector=df_transactions_filtered2.groupby(['sector','Side']).sum()[['Buy','Sell','value_position']].reset_index()
+    df_capital_sector=df_transactions_filtered2[['Buy','Sell','value_position','sector','Side']].groupby(['sector','Side']).sum().reset_index()
     df_capital_sector['Buy']=df_capital_sector['Buy']+df_capital_sector['Sell']
     del df_capital_sector['Sell']
     df_capital_sector.columns=['Sector','Action','Count','Capital']
