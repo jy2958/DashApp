@@ -5,16 +5,13 @@ from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import plotly.express as px
 import datetime
-# Set Path
-path_result = '/Users/anthony/Downloads/Q_Project_Data/Overall Framwork/Daily_updated_folder/'
-path_dash=path_result + 'Dash/'
 
 # Load Inputs1: trading log with preds and value_position
 # Load Inputs2: execution log
 
-df_inputs=pd.read_csv(path_dash+'df_log_periods_w_latest.csv')
-df_transactions=pd.read_csv(path_dash+'df_transactions_latest.csv')
-df_price_800=pd.read_csv(path_dash+'df_price_800_latest.csv',index_col=0)
+df_inputs=pd.read_csv('df_log_periods_w_latest.csv')
+df_transactions=pd.read_csv('df_transactions_latest.csv')
+df_price_800=pd.read_csv('df_price_800_latest.csv',index_col=0)
 # Data Prep
 sum_value = df_inputs.groupby('date').sum()
 sum_value.index = pd.to_datetime(sum_value.index)
