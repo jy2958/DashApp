@@ -104,7 +104,8 @@ def render_content(tab, start_date, end_date, risk_free_rate):
 
     df_transactions_filtered = df_transactions_filtered.reset_index(drop=True)
     df_pnl_filtered = df_transactions_filtered.groupby('code')['PNL'].sum().reset_index()
-    df_transactions_filtered_execute=df_transactions_filtered.groupby('code')['Buy','Sell'].sum().reset_index()
+    df_transactions_filtered_execute=df_transactions_filtered[['Buy','Sell','code']].groupby('code').sum().reset_index()
+  
     df_pnl_filtered = df_pnl_filtered.sort_values(by='PNL', ascending=False).reset_index(drop=1).reset_index()  # 按照 PNL 从大到小排序
     df_pnl_filtered = pd.merge(df_pnl_filtered,
                                df_index_components_uni,
