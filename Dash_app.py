@@ -6,7 +6,7 @@ from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import plotly.express as px
 import datetime
-from tools import calculate_performance,calculate_and_export_cumulative_return_probabilities,
+from tools import calculate_performance,calculate_and_export_cumulative_return_probabilities
 # Load Inputs1: trading log with preds and value_position
 # Load Inputs2: execution log
 
