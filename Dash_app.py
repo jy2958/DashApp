@@ -9,6 +9,8 @@ import datetime
 from tools import calculate_performance,calculate_and_export_cumulative_return_probabilities
 # Load Inputs1: trading log with preds and value_position
 # Load Inputs2: execution log
+# Load Inputs3: index for benchmark
+# Load Inputs4: index components stock codes and names
 
 df_inputs=pd.read_csv('df_log_periods_w_latest.csv')
 df_transactions=pd.read_csv('df_transactions_latest.csv')
