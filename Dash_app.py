@@ -5,17 +5,20 @@ from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import plotly.express as px
 import datetime
-
+from tools import calculate_performance,calculate_and_export_cumulative_return_probabilities,
 # Load Inputs1: trading log with preds and value_position
 # Load Inputs2: execution log
 
 df_inputs=pd.read_csv('df_log_periods_w_latest.csv')
 df_transactions=pd.read_csv('df_transactions_latest.csv')
 df_price_800=pd.read_csv('df_price_800_latest.csv',index_col=0)
+df_index_components_uni=pd.read_csv('df_index_components_uni_latest.csv')
+df_inputs['date']=pd.to_datetime(df_inputs['date'])
+df_transactions['date']=pd.to_datetime(df_transactions['date'])
+df_price_800.index=pd.to_datetime(df_price_800.index)
+
 # Data Prep
 sum_value = df_inputs.groupby('date').sum()
-sum_value.index = pd.to_datetime(sum_value.index)
-df_price_800.index=pd.to_datetime(df_price_800.index)
 sum_value2 = pd.merge(sum_value, df_price_800, left_index=True, right_index=True)
 sum_value2['price_zz800_adj'] = sum_value2['price_zz800_adj'] / sum_value2['price_zz800_adj'].tolist()[0]
 sum_value2['price_zz800_adj'] = sum_value2['price_zz800_adj'] * 10000
